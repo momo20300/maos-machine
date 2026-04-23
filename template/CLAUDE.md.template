@@ -1,0 +1,124 @@
+# CLAUDE.md — Guide operationnel Pipeline Autonome
+
+**Version** : 1.0
+**Date** : ___DATE___
+**Projet** : ___PROJECT_NAME___
+**Auteur** : ___AUTHOR___
+
+---
+
+## LIS-MOI EN PREMIER
+
+Tu es un agent Claude Code sur ce projet. Lis ce fichier EN ENTIER avant d'executer la moindre commande.
+
+---
+
+## IDENTITE PROJET
+
+**Nom** : ___PROJECT_NAME___
+**Description** : ___PROJECT_DESCRIPTION___
+**Stack** : ___STACK___
+
+---
+
+## PIPELINE AUTONOME — 6 AGENTS
+
+### Principe
+
+Ce projet est developpe par 6 agents Claude Code autonomes en boucle continue. Ils communiquent UNIQUEMENT via `.maos-pipeline/`.
+
+### Les agents
+
+| Agent | Commande | Role | Touche au code ? |
+|---|---|---|---|
+| **Stratege** | `/loop 600 /stratege` | Architecte, planificateur | NON |
+| **Code-Dev 1** | `/loop 600 /code-dev` | Developpeur instance 1 | OUI |
+| **Code-Dev 2** | `/loop 600 /code-dev` | Developpeur instance 2 | OUI |
+| **Testeur** | `/loop 600 /testeur` | Auditeur qualite | NON |
+| **DevOps** | `/loop 600 /devops` | Deploy, monitoring | NON (sauf deploy) |
+| **Designer** | `/loop 600 /designer` | UI/UX specs | NON |
+
+### Lancement (6 terminaux)
+
+```
+Terminal 1 : /loop 600 /stratege
+Terminal 2 : /loop 600 /code-dev
+Terminal 3 : /loop 600 /code-dev
+Terminal 4 : /loop 600 /testeur
+Terminal 5 : /loop 600 /devops
+Terminal 6 : /loop 600 /designer
+```
+
+---
+
+## REGLES OPERATIONNELLES
+
+### Regle 1 — Jamais d'invention
+Avant tout code : verifier l'etat reel. Jamais de stub, jamais hardcode.
+
+### Regle 2 — Max 280 lignes par fichier TS
+Si depassement : split.
+
+### Regle 3 — Sentry.captureException() dans CHAQUE catch
+Pas de catch silencieux.
+
+### Regle 4 — Mise a jour CLAUDE.md apres chaque changement majeur
+Ce document est la source de verite.
+
+### Regle 5 — Commits conventionnels
+```
+feat(scope): description
+fix(scope): description
+refactor(scope): description
+```
+
+### Regle 6 — Pas de push sans validation fondateur
+Toutes modifs sur la branche de travail.
+
+### Regle 7 — Diagnostic avant fix
+Bug mal compris = diagnostic d'abord, patch ensuite.
+
+### Regle 8 — Pipeline first
+Toute tache passe par la pipeline.
+
+---
+
+## STACK ET INFRASTRUCTURE
+
+### Stack
+(a remplir par le fondateur)
+
+### Infrastructure
+(a remplir par le fondateur)
+
+---
+
+## ETAT ACTUEL
+
+### Fonctionnel
+(a remplir au fur et a mesure)
+
+### Bugs actifs
+(a remplir au fur et a mesure)
+
+---
+
+## COMMANDES UTILES
+
+### Build
+```bash
+# Backend
+cd backend && npm run build
+
+# Frontend
+cd frontend && npm run build
+```
+
+### Deploy
+```bash
+# (a configurer selon l'infra)
+```
+
+---
+
+**FIN CLAUDE.md v1.0**

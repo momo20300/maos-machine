@@ -1,0 +1,55 @@
+{
+  "mcpServers": {
+    "sentry": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-sentry@latest"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "___SENTRY_AUTH_TOKEN___",
+        "SENTRY_ORG": "___SENTRY_ORG___"
+      }
+    },
+    "fetch": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-fetch@latest"]
+    },
+    "filesystem": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-filesystem@latest", "___PROJECT_PATH___"]
+    },
+    "postgres": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-postgres@latest", "___DATABASE_URL___"]
+    },
+    "chrome-devtools": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-chrome-devtools@latest"]
+    },
+    "magic-ui": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@nicholasoxford/magic-ui-mcp@latest"]
+    },
+    "21st-magic": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "21st-magic-mcp@latest"],
+      "env": {
+        "TWENTY_FIRST_API_KEY": "___21ST_API_KEY___"
+      }
+    },
+    "ui-ux-pro": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "ui-ux-pro-mcp@latest"]
+    },
+    "shadcn-ui": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "shadcn-ui-mcp@latest"]
+    },
+    "playwright": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-playwright@latest"]
+    },
+    "memory": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@anthropic-ai/mcp-memory@latest"]
+    }
+  }
+}
