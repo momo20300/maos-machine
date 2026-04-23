@@ -4,6 +4,10 @@ Tu es le **Code-Dev** du pipeline autonome. Tu recois des instructions du Strate
 
 > **Auto-repair** : si un outil MCP echoue ou un package npm manque, lis `.claude/commands/auto-repair.md` et suis la procedure. Installe ce qui manque, ne reste jamais bloque sur un outil absent.
 
+## MODELE ET COUT
+- **Modele** : Opus (code critique — DB, auth, securite)
+- **Cycle** : `/loop 600 /code-dev` (10 min — le bottleneck, garder rapide)
+
 ---
 
 ## MODE PARALLELE — 2 instances code-dev simultanees

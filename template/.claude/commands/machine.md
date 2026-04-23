@@ -215,11 +215,11 @@ PROJECT_PATH=$(pwd)
 PROJECT_PATH_WIN=$(echo "$PROJECT_PATH" | sed 's|/c/|C:/|' | sed 's|/|\\|g')
 
 # Chef en premier (toujours x1)
-start "CHEF" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 120 /chef\""
+start "CHEF" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 180 /chef\""
 sleep 3
 
 # Stratege (x nombre choisi)
-start "STRATEGE" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 600 /stratege\""
+start "STRATEGE" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 900 /stratege\""
 sleep 2
 
 # Code-dev (x nombre choisi)
@@ -230,15 +230,15 @@ start "CODE-DEV-2" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 600 
 sleep 2
 
 # Testeur (x nombre choisi)
-start "TESTEUR" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 600 /testeur\""
+start "TESTEUR" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 900 /testeur\""
 sleep 2
 
 # DevOps (x1)
-start "DEVOPS" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 600 /devops\""
+start "DEVOPS" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 900 /devops\""
 sleep 2
 
 # Designer (x nombre choisi)
-start "DESIGNER" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 600 /designer\""
+start "DESIGNER" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 900 /designer\""
 sleep 2
 
 # Veilleur-tech (x1 — premier scan puis hebdomadaire)
@@ -262,13 +262,13 @@ start "VEILLEUR-TECH" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/veille
     Repo    : [remote original]
 
   Agents lances :
-    Chef           x1  (cycle 120s)
-    Stratege       x[N] (cycle 600s)
-    Code-dev       x[N] (cycle 600s)
-    Testeur        x[N] (cycle 600s)
-    DevOps         x1  (cycle 600s)
-    Designer       x[N] (cycle 600s)
-    Veilleur-tech  x1  (cycle 600s)
+    Chef           x1  (cycle 180s — Sonnet)
+    Stratege       x[N] (cycle 900s — Opus)
+    Code-dev       x[N] (cycle 600s — Opus)
+    Testeur        x[N] (cycle 900s — Sonnet)
+    DevOps         x1  (cycle 900s — Sonnet)
+    Designer       x[N] (cycle 900s — Sonnet)
+    Veilleur-tech  x1  (hebdomadaire — Sonnet)
     ─────────────────
     Total          [N] terminaux
 

@@ -4,6 +4,10 @@ Tu es le **Stratege** du pipeline autonome. Tu es l'architecte, le planificateur
 
 > **Auto-repair** : si un outil MCP echoue, lis `.claude/commands/auto-repair.md` et suis la procedure de reparation.
 
+## MODELE ET COUT
+- **Modele** : Opus (decisions d'architecture critiques)
+- **Cycle** : `/loop 900 /stratege` (15 min — la planification n'est pas urgente)
+
 ---
 
 ## MODE PARALLELE — Instances multiples
@@ -88,7 +92,7 @@ REPETER EN CONTINU :
 
   3. ScheduleWakeup pour programmer le prochain cycle
      - Travail actif → 270 secondes
-     - Idle → 600 secondes
+     - Idle → 900 secondes
      - prompt: "<<autonomous-loop-dynamic>>"
 ```
 

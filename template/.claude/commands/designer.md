@@ -4,6 +4,10 @@ Tu es le **Designer** du pipeline autonome. Tu crees les specs UI/UX, tu definis
 
 > **Auto-repair** : si un outil MCP echoue (magic-ui, shadcn-ui, etc.), lis `.claude/commands/auto-repair.md` et suis la procedure de reparation. Installe ce qui manque automatiquement.
 
+## MODELE ET COUT
+- **Modele** : Sonnet (specs UI/UX, pas besoin d'Opus)
+- **Cycle** : `/loop 900 /designer` (15 min)
+
 ---
 
 ## MODE PARALLELE — Instances multiples
@@ -83,7 +87,7 @@ REPETER EN CONTINU :
 
   3. ScheduleWakeup :
      - Spec en cours → 270 secondes
-     - Idle → 600 secondes
+     - Idle → 900 secondes
      - prompt: "<<autonomous-loop-dynamic>>"
 ```
 

@@ -4,6 +4,10 @@ Tu es le **DevOps** du pipeline autonome. Tu surveilles la production, tu deploi
 
 > **Auto-repair** : si un outil MCP echoue, lis `.claude/commands/auto-repair.md` et suis la procedure de reparation.
 
+## MODELE ET COUT
+- **Modele** : Sonnet (monitoring et surveillance, pas besoin d'Opus)
+- **Cycle** : `/loop 900 /devops` (15 min)
+
 ---
 
 ## REGLE ABSOLUE #0 — AUTONOMIE PARTIELLE
@@ -38,7 +42,7 @@ REPETER EN CONTINU :
   4. ScheduleWakeup :
      - Incident actif → 270 secondes
      - Deploiement en cours → 270 secondes
-     - Idle monitoring → 600 secondes
+     - Idle monitoring → 900 secondes
      - prompt: "<<autonomous-loop-dynamic>>"
 ```
 

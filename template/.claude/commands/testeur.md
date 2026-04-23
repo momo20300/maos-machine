@@ -4,6 +4,10 @@ Tu es le **Testeur** du pipeline autonome. Tu audites le code produit par le cod
 
 > **Auto-repair** : si un outil MCP echoue (Chrome DevTools, Playwright, etc.), lis `.claude/commands/auto-repair.md` et suis la procedure de reparation.
 
+## MODELE ET COUT
+- **Modele** : Sonnet (audit et lecture de code, pas besoin d'Opus)
+- **Cycle** : `/loop 900 /testeur` (15 min)
+
 ---
 
 ## MODE PARALLELE — Instances multiples
@@ -69,7 +73,7 @@ REPETER EN CONTINU :
 
   3. ScheduleWakeup :
      - Audit en cours → 270 secondes
-     - Idle → 600 secondes
+     - Idle → 900 secondes
      - prompt: "<<autonomous-loop-dynamic>>"
 ```
 

@@ -374,11 +374,11 @@ echo.
 cd /d "$TARGET_BAT"
 
 echo  [1] Lancement du Chef d'Orchestre...
-start "CHEF" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 120 /chef\""
+start "CHEF" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 180 /chef\""
 timeout /t 3 /nobreak >nul
 
 echo  [2] Lancement du Stratege...
-start "STRATEGE" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 600 /stratege\""
+start "STRATEGE" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /stratege\""
 timeout /t 2 /nobreak >nul
 
 BATEOF
@@ -397,19 +397,19 @@ done
 NEXT=$((NUM_CODEDEV + 3))
 cat >> "$TARGET/start-machine.bat" << BATEOF
 echo  [$NEXT] Lancement du Testeur...
-start "TESTEUR" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 600 /testeur\""
+start "TESTEUR" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /testeur\""
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+1))] Lancement du DevOps...
-start "DEVOPS" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 600 /devops\""
+start "DEVOPS" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /devops\""
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+2))] Lancement du Designer...
-start "DESIGNER" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 600 /designer\""
+start "DESIGNER" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /designer\""
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+3))] Lancement du Veilleur Tech...
-start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 600 /veilleur-tech\""
+start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && claude -p \"/veilleur-tech\""
 
 echo.
 echo  ══════════════════════════════════════════════

@@ -23,7 +23,7 @@
 
 ```
                     ┌─────────────────┐
-                    │  CHEF D'ORCHESTRE│  ← cycle 120s, vision globale
+                    │  CHEF D'ORCHESTRE│  ← cycle 180s, vision globale
                     │  PLAN + ZONES   │
                     │  + STATUS       │
                     └────────┬────────┘
@@ -58,22 +58,22 @@
 
 ```bash
 # Minimal (8 terminaux)
-Terminal 1  : /loop 120 /chef            # OBLIGATOIRE — cycle rapide 120s
-Terminal 2  : /loop 600 /stratege
+Terminal 1  : /loop 180 /chef            # OBLIGATOIRE — cycle rapide 180s
+Terminal 2  : /loop 900 /stratege
 Terminal 3  : /loop 600 /code-dev        # instance 1
 Terminal 4  : /loop 600 /code-dev        # instance 2
-Terminal 5  : /loop 600 /testeur
-Terminal 6  : /loop 600 /devops
-Terminal 7  : /loop 600 /designer
+Terminal 5  : /loop 900 /testeur
+Terminal 6  : /loop 900 /devops
+Terminal 7  : /loop 900 /designer
 Terminal 8  : /loop 600 /veilleur-tech   # ou cron tous les 2 jours
 
 # Mode turbo (exemple 14 terminaux)
-Terminal 1     : /loop 120 /chef          # x1 TOUJOURS (jamais plus)
-Terminal 2-3   : /loop 600 /stratege      # x2
+Terminal 1     : /loop 180 /chef          # x1 TOUJOURS (jamais plus)
+Terminal 2-3   : /loop 900 /stratege      # x2
 Terminal 4-8   : /loop 600 /code-dev      # x5
-Terminal 9-10  : /loop 600 /testeur       # x2
-Terminal 11    : /loop 600 /devops        # x1
-Terminal 12-13 : /loop 600 /designer      # x2
+Terminal 9-10  : /loop 900 /testeur       # x2
+Terminal 11    : /loop 900 /devops        # x1
+Terminal 12-13 : /loop 900 /designer      # x2
 Terminal 14    : /loop 600 /veilleur-tech # x1
 ```
 
