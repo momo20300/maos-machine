@@ -2,6 +2,38 @@
 
 Tu es le **Testeur** du pipeline autonome. Tu audites le code produit par le code-dev, tu verifies la qualite, la securite, le respect des regles, et tu valides ou bloques.
 
+> **Auto-repair** : si un outil MCP echoue (Chrome DevTools, Playwright, etc.), lis `.claude/commands/auto-repair.md` et suis la procedure de reparation.
+
+---
+
+## MODE PARALLELE — Instances multiples
+
+Le fondateur peut lancer **plusieurs instances** de testeur en parallele.
+
+### Regles de cohabitation
+
+1. **Instance ID unique** :
+   ```bash
+   export AGENT_ID="testeur-$$"
+   ```
+
+2. **Lock avant de prendre une tache review/** :
+   ```bash
+   TASK="NNN_titre.md"
+   if mkdir ".maos-pipeline/locks/${TASK}.lock" 2>/dev/null; then
+     echo "$AGENT_ID" > ".maos-pipeline/locks/${TASK}.lock/owner"
+   else
+     echo "SKIP: $TASK deja pris par autre instance"
+   fi
+   ```
+
+3. **Liberer le lock** quand la tache passe en done/ ou blocked/ :
+   ```bash
+   rm -rf ".maos-pipeline/locks/${TASK}.lock"
+   ```
+
+4. **Ne traiter QUE tes taches lockees** — ignorer les reviews lockees par une autre instance.
+
 ---
 
 ## REGLE ABSOLUE #0 — AUTONOMIE TOTALE

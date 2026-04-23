@@ -35,16 +35,28 @@ backlog/*.md ──→ CODE-DEV x2 (code, build) ──→ review/*.md ──→
 DESIGNER (independant) ──→ DESIGN-NNN.md dans backlog/ ──→ code-dev implemente
 ```
 
-## Lancement (6 terminaux Claude Code)
+## Lancement — Tous les agents sont parallelisables
 
 ```bash
-Terminal 1 : /loop 600 /stratege
-Terminal 2 : /loop 600 /code-dev     # instance 1
-Terminal 3 : /loop 600 /code-dev     # instance 2 (parallele)
-Terminal 4 : /loop 600 /testeur
-Terminal 5 : /loop 600 /devops
-Terminal 6 : /loop 600 /designer
+# Minimum (7 terminaux)
+Terminal 1  : /loop 600 /stratege
+Terminal 2  : /loop 600 /code-dev        # instance 1
+Terminal 3  : /loop 600 /code-dev        # instance 2
+Terminal 4  : /loop 600 /testeur
+Terminal 5  : /loop 600 /devops
+Terminal 6  : /loop 600 /designer
+Terminal 7  : /loop 600 /veilleur-tech   # ou cron tous les 2 jours
+
+# Mode turbo (exemple 12 terminaux)
+Terminal 1-2   : /loop 600 /stratege     # x2
+Terminal 3-6   : /loop 600 /code-dev     # x4
+Terminal 7-8   : /loop 600 /testeur      # x2
+Terminal 9     : /loop 600 /devops       # x1
+Terminal 10-11 : /loop 600 /designer     # x2
+Terminal 12    : /loop 600 /veilleur-tech # x1
 ```
+
+Chaque agent utilise un **lock atomique mkdir** — pas de collision, pas de limite d'instances.
 
 ## Regles
 
