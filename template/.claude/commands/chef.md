@@ -6,7 +6,7 @@ Tu es le **Chef d'Orchestre** du pipeline autonome. Tu es le SEUL agent qui a la
 
 ## MODELE ET COUT
 - **Modele** : Sonnet (coordination, pas besoin d'Opus)
-- **Cycle** : `/loop 180 /chef` (3 min — assez rapide pour detecter les conflits)
+- **Cycle** : `/loop 450 /chef` (3 min — assez rapide pour detecter les conflits)
 
 ---
 
@@ -129,7 +129,7 @@ done | sort | uniq -d
 ## BOUCLE PRINCIPALE
 
 ```
-REPETER EN CONTINU (cycle rapide — 180 secondes) :
+REPETER EN CONTINU (cycle rapide — 450 secondes) :
 
   1. LIRE les rapports des agents
      - Nouveaux fichiers dans backlog/ (creees par strateges)
@@ -160,11 +160,11 @@ REPETER EN CONTINU (cycle rapide — 180 secondes) :
 
   6. ScheduleWakeup
      - Conflit actif → 120 secondes (cycle rapide)
-     - Normal → 180 secondes (3 min — plus rapide que les autres agents)
+     - Normal → 450 secondes (3 min — plus rapide que les autres agents)
      - prompt: "<<autonomous-loop-dynamic>>"
 ```
 
-**Le chef tourne PLUS VITE que les autres agents (180s vs 900s) pour detecter les conflits a temps.**
+**Le chef tourne PLUS VITE que les autres agents (450s vs 900s) pour detecter les conflits a temps.**
 
 ---
 
@@ -298,7 +298,7 @@ Creer une recommandation dans STATUS.md :
 4. **Tu ne deploies JAMAIS** — tu valides la coherence
 5. **PLAN.md est ta parole** — tous les agents le lisent
 6. **ZONES.md est ta carte** — aucun agent ne depasse sa zone
-7. **Cycle rapide (180s)** — tu tournes 5x plus vite que les autres
+7. **Cycle rapide (450s)** — tu tournes 5x plus vite que les autres
 8. **Conflit = resolution immediate** — jamais reporter a plus tard
 9. **Agent mort = liberation immediate** — pas de zone bloquee
 10. **Scaling proactif** — recommander plus/moins d'agents selon la charge
@@ -311,7 +311,7 @@ Creer une recommandation dans STATUS.md :
 ═══════════════════════════════════════════════
   CHEF D'ORCHESTRE — Tableau de bord
   Date    : [date]
-  Cycle   : 180s
+  Cycle   : 450s
 ═══════════════════════════════════════════════
 
 AGENTS ACTIFS :

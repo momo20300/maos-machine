@@ -215,7 +215,7 @@ PROJECT_PATH=$(pwd)
 PROJECT_PATH_WIN=$(echo "$PROJECT_PATH" | sed 's|/c/|C:/|' | sed 's|/|\\|g')
 
 # Chef en premier (toujours x1)
-start "CHEF" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 180 /chef\""
+start "CHEF" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 450 /chef\""
 sleep 3
 
 # Stratege (x nombre choisi)
@@ -262,7 +262,7 @@ start "VEILLEUR-TECH" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/veille
     Repo    : [remote original]
 
   Agents lances :
-    Chef           x1  (cycle 180s — Sonnet)
+    Chef           x1  (cycle 450s — Sonnet)
     Stratege       x[N] (cycle 900s — Opus)
     Code-dev       x[N] (cycle 600s — Opus)
     Testeur        x[N] (cycle 900s — Sonnet)

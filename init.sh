@@ -374,7 +374,7 @@ echo.
 cd /d "$TARGET_BAT"
 
 echo  [1] Lancement du Chef d'Orchestre...
-start "CHEF" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 180 /chef\""
+start "CHEF" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 450 /chef\""
 timeout /t 3 /nobreak >nul
 
 echo  [2] Lancement du Stratege...
