@@ -1,9 +1,12 @@
-# Pipeline Autonome — 6 Agents IA
+# Pipeline Autonome — Agents IA Coordonnes
 
 ## Structure
 
 ```
 .maos-pipeline/
+├── PLAN.md        → direction du sprint (ecrit par le Chef)
+├── ZONES.md       → carte des territoires (ecrit par le Chef)
+├── STATUS.md      → etat temps reel de tous les agents (ecrit par le Chef)
 ├── backlog/       → taches creees par stratege, en attente de code-dev
 ├── in-progress/   → taches en cours d'execution par code-dev
 ├── review/        → taches terminees par code-dev, en attente du testeur
@@ -11,52 +14,71 @@
 ├── blocked/       → taches bloquees (retour au stratege pour correction)
 ├── deployed/      → taches deployees en production
 ├── incidents/     → incidents prod detectes par devops
-├── checkpoints/   → snapshots horaires du stratege
-├── locks/         → locks pour code-dev parallele (ne pas modifier manuellement)
+├── checkpoints/   → snapshots horaires du stratege + rapports veilleur-tech
+├── locks/         → locks atomiques (ne pas modifier manuellement)
 └── archived-v1/   → taches archivees
 ```
 
-## Flux de travail
+## Architecture
 
 ```
-STRATEGE (analyse, planifie)
-     │
-     ▼
-backlog/*.md ──→ CODE-DEV x2 (code, build) ──→ review/*.md ──→ TESTEUR (audit, test)
-                                                                     │
-                                                           ┌────────┴────────┐
-                                                           │                 │
-                                                       done/*.md        blocked/*.md
-                                                           │                 │
-                                                       DEVOPS           STRATEGE
-                                                   (deploy avec        (analyse +
-                                                    accord fondateur)   correction)
+                    ┌─────────────────┐
+                    │  CHEF D'ORCHESTRE│  ← cycle 120s, vision globale
+                    │  PLAN + ZONES   │
+                    │  + STATUS       │
+                    └────────┬────────┘
+                             │
+              ┌──────────────┼──────────────┐
+              │              │              │
+         PLAN.md        ZONES.md       STATUS.md
+         (direction)    (territoires)  (temps reel)
+              │              │              │
+    ┌─────────┼─────────┐   │   ┌──────────┼──────────┐
+    ▼         ▼         ▼   ▼   ▼          ▼          ▼
+ STRATEGE  STRATEGE  DESIGNER  CODE-DEV  CODE-DEV  CODE-DEV
+   x1+       x1+      x1+      x1+       x1+       x1+
+    │                             │
+    ▼                             ▼
+ backlog/*.md              review/*.md
+                                │
+                    ┌───────────┼───────────┐
+                    ▼                       ▼
+                TESTEUR x1+           TESTEUR x1+
+                    │                       │
+               done/*.md              blocked/*.md
+                    │                       │
+                DEVOPS x1             STRATEGE
+              (accord fondateur)     (correction)
 
-DESIGNER (independant) ──→ DESIGN-NNN.md dans backlog/ ──→ code-dev implemente
+         VEILLEUR-TECH x1
+         (auto-upgrade MCP, skills, modeles tous les 2 jours)
 ```
 
 ## Lancement — Tous les agents sont parallelisables
 
 ```bash
-# Minimum (7 terminaux)
-Terminal 1  : /loop 600 /stratege
-Terminal 2  : /loop 600 /code-dev        # instance 1
-Terminal 3  : /loop 600 /code-dev        # instance 2
-Terminal 4  : /loop 600 /testeur
-Terminal 5  : /loop 600 /devops
-Terminal 6  : /loop 600 /designer
-Terminal 7  : /loop 600 /veilleur-tech   # ou cron tous les 2 jours
+# Minimal (8 terminaux)
+Terminal 1  : /loop 120 /chef            # OBLIGATOIRE — cycle rapide 120s
+Terminal 2  : /loop 600 /stratege
+Terminal 3  : /loop 600 /code-dev        # instance 1
+Terminal 4  : /loop 600 /code-dev        # instance 2
+Terminal 5  : /loop 600 /testeur
+Terminal 6  : /loop 600 /devops
+Terminal 7  : /loop 600 /designer
+Terminal 8  : /loop 600 /veilleur-tech   # ou cron tous les 2 jours
 
-# Mode turbo (exemple 12 terminaux)
-Terminal 1-2   : /loop 600 /stratege     # x2
-Terminal 3-6   : /loop 600 /code-dev     # x4
-Terminal 7-8   : /loop 600 /testeur      # x2
-Terminal 9     : /loop 600 /devops       # x1
-Terminal 10-11 : /loop 600 /designer     # x2
-Terminal 12    : /loop 600 /veilleur-tech # x1
+# Mode turbo (exemple 14 terminaux)
+Terminal 1     : /loop 120 /chef          # x1 TOUJOURS (jamais plus)
+Terminal 2-3   : /loop 600 /stratege      # x2
+Terminal 4-8   : /loop 600 /code-dev      # x5
+Terminal 9-10  : /loop 600 /testeur       # x2
+Terminal 11    : /loop 600 /devops        # x1
+Terminal 12-13 : /loop 600 /designer      # x2
+Terminal 14    : /loop 600 /veilleur-tech # x1
 ```
 
-Chaque agent utilise un **lock atomique mkdir** — pas de collision, pas de limite d'instances.
+**Le Chef d'Orchestre est TOUJOURS lance en premier. Jamais plus d'1 instance.**
+Tous les autres agents utilisent un **lock atomique mkdir** — pas de limite d'instances.
 
 ## Regles
 

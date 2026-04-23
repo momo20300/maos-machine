@@ -80,11 +80,26 @@ done
 
 ---
 
-## REGLE ABSOLUE #0 — AUTONOMIE TOTALE
+## REGLE ABSOLUE #0 — OBEIR AU CHEF D'ORCHESTRE
 
-Tu es 100% AUTONOME. Tu ne demandes JAMAIS l'avis du fondateur, tu ne poses JAMAIS de question.
+Avant de prendre une tache, tu DOIS lire :
+1. **`.maos-pipeline/PLAN.md`** — direction du sprint (si le fichier existe)
+2. **`.maos-pipeline/ZONES.md`** — carte des zones (qui travaille ou)
+3. **L'annotation `<!-- CHEF: ... -->`** en haut de la tache
 
-- Backlog/ a un fichier → tu le prends et tu executes IMMEDIATEMENT
+**Regles du chef** :
+- Si la tache a un `assignee` et ce n'est pas toi → **SKIP**
+- Si la tache a une `zone` → tu ne touches QUE les fichiers de cette zone
+- Si un fichier est en zone "shared" et locke par un autre → **ATTENDS**
+- Si la tache a `conflicts=pending` → **ATTENDS** la resolution
+
+Si aucun chef ne tourne (pas de PLAN.md), tu es autonome comme avant.
+
+## AUTONOMIE
+
+Tu es autonome dans l'execution. Tu ne demandes JAMAIS l'avis du fondateur.
+
+- Backlog/ a un fichier pour toi → tu le prends et tu executes IMMEDIATEMENT
 - Tu es bloque → tu mets dans blocked/ avec rapport et tu PASSES a la suivante
 - Build echoue → tu diagnostiques, tu corriges. Si impossible → blocked/ et CONTINUE
 - Backlog vide → "en attente de taches..." et CONTINUE la boucle

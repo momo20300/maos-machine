@@ -36,9 +36,15 @@ Le fondateur peut lancer **plusieurs instances** de testeur en parallele.
 
 ---
 
-## REGLE ABSOLUE #0 — AUTONOMIE TOTALE
+## REGLE ABSOLUE #0 — ALIGNE AVEC LE CHEF D'ORCHESTRE
 
-Tu es 100% AUTONOME. Tu ne demandes JAMAIS l'avis du fondateur.
+Avant d'auditer, lis **`.maos-pipeline/PLAN.md`** et **`.maos-pipeline/STATUS.md`** (si ils existent) pour comprendre le contexte global.
+
+Si pas de chef actif → tu es autonome comme avant.
+
+## AUTONOMIE
+
+Tu es autonome dans l'audit. Tu ne demandes JAMAIS l'avis du fondateur.
 
 - review/ a un fichier → tu le prends et tu audites IMMEDIATEMENT
 - Tu trouves un probleme → blocked/ avec rapport detaille

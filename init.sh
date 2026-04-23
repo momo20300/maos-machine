@@ -94,11 +94,11 @@ echo -e "  ${GREEN}✓${NC} 10 dossiers pipeline crees"
 # ============================================================
 # 2. Agents (skills)
 # ============================================================
-echo -e "${GREEN}[2/6] Installation des 7 agents + auto-repair...${NC}"
+echo -e "${GREEN}[2/6] Installation des 8 agents + auto-repair...${NC}"
 
 mkdir -p "$TARGET/.claude/commands"
 
-AGENTS=("stratege" "code-dev" "testeur" "devops" "designer" "veilleur-tech" "auto-repair")
+AGENTS=("chef" "stratege" "code-dev" "testeur" "devops" "designer" "veilleur-tech" "auto-repair")
 for agent in "${AGENTS[@]}"; do
   cp "$TEMPLATE_DIR/.claude/commands/${agent}.md" "$TARGET/.claude/commands/${agent}.md"
   echo -e "  ${GREEN}✓${NC} ${agent}.md installe"
@@ -186,7 +186,7 @@ echo -e "${PURPLE}════════════════════�
 echo ""
 echo -e "  Projet     : $TARGET"
 echo -e "  Pipeline   : .maos-pipeline/ (10 dossiers)"
-echo -e "  Agents     : .claude/commands/ (7 skills + auto-repair)"
+echo -e "  Agents     : .claude/commands/ (8 skills + auto-repair)"
 echo -e "  MCP        : .mcp.json (11 servers)"
 echo -e "  Permissions: .claude/settings.local.json"
 echo ""
@@ -203,19 +203,19 @@ echo -e "  2. Personnaliser ${BLUE}CLAUDE.md${NC} — stack, infra, regles metie
 echo ""
 echo -e "  3. Lancer les agents dans des terminaux Claude Code :"
 echo ""
-echo -e "     ${GREEN}Terminal 1  :${NC} /loop 600 /stratege        ${YELLOW}# x1 ou plus${NC}"
-echo -e "     ${GREEN}Terminal 2  :${NC} /loop 600 /code-dev        ${YELLOW}# x2, x3... pas de limite${NC}"
-echo -e "     ${GREEN}Terminal 3  :${NC} /loop 600 /code-dev"
-echo -e "     ${GREEN}Terminal 4  :${NC} /loop 600 /code-dev        ${YELLOW}# optionnel${NC}"
-echo -e "     ${GREEN}Terminal 5  :${NC} /loop 600 /testeur         ${YELLOW}# x1 ou plus${NC}"
-echo -e "     ${GREEN}Terminal 6  :${NC} /loop 600 /testeur         ${YELLOW}# optionnel${NC}"
+echo -e "     ${RED}Terminal 1  :${NC} /loop 120 /chef             ${RED}# OBLIGATOIRE — x1 TOUJOURS${NC}"
+echo -e "     ${GREEN}Terminal 2  :${NC} /loop 600 /stratege        ${YELLOW}# x1 ou plus${NC}"
+echo -e "     ${GREEN}Terminal 3  :${NC} /loop 600 /code-dev        ${YELLOW}# x2, x3... pas de limite${NC}"
+echo -e "     ${GREEN}Terminal 4  :${NC} /loop 600 /code-dev"
+echo -e "     ${GREEN}Terminal 5  :${NC} /loop 600 /code-dev        ${YELLOW}# optionnel${NC}"
+echo -e "     ${GREEN}Terminal 6  :${NC} /loop 600 /testeur         ${YELLOW}# x1 ou plus${NC}"
 echo -e "     ${GREEN}Terminal 7  :${NC} /loop 600 /devops          ${YELLOW}# x1${NC}"
 echo -e "     ${GREEN}Terminal 8  :${NC} /loop 600 /designer        ${YELLOW}# x1 ou plus${NC}"
 echo -e "     ${GREEN}Terminal 9  :${NC} /loop 600 /veilleur-tech   ${YELLOW}# x1 (ou cron 2 jours)${NC}"
 echo ""
-echo -e "  ${PURPLE}TOUS les agents supportent le mode parallele.${NC}"
-echo -e "  ${PURPLE}Lock atomique mkdir — pas de collision, pas de limite.${NC}"
-echo -e "  ${PURPLE}Le veilleur-tech auto-upgrade les MCP, skills, et modeles.${NC}"
+echo -e "  ${RED}LE CHEF DEMARRE EN PREMIER. Toujours x1. Cycle rapide 120s.${NC}"
+echo -e "  ${PURPLE}Tous les autres agents : paralleles, lock atomique, pas de limite.${NC}"
+echo -e "  ${PURPLE}Le veilleur-tech auto-upgrade MCP, skills, et modeles.${NC}"
 echo ""
 echo -e "${GREEN}La machine est prete. Lance les agents et laisse tourner.${NC}"
 echo ""

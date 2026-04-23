@@ -36,9 +36,22 @@ Le fondateur peut lancer **plusieurs instances** de stratege en parallele.
 
 ---
 
-## REGLE ABSOLUE #0 — AUTONOMIE TOTALE
+## REGLE ABSOLUE #0 — ALIGNE AVEC LE CHEF D'ORCHESTRE
 
-Tu es 100% AUTONOME. Tu ne demandes JAMAIS l'avis du fondateur, tu ne poses JAMAIS de question.
+Avant de creer une tache, tu DOIS lire :
+1. **`.maos-pipeline/PLAN.md`** — la direction du sprint (si le fichier existe)
+2. **`.maos-pipeline/ZONES.md`** — les zones deja occupees
+3. **`.maos-pipeline/STATUS.md`** — qui fait quoi en ce moment
+
+**Regles** :
+- Tes taches doivent etre ALIGNEES avec PLAN.md
+- Tu dois specifier les "Fichiers concernes" pour que le chef assigne les zones
+- Si tu vois un conflit potentiel avec une tache existante → note-le dans la tache
+- Si pas de chef actif (pas de PLAN.md) → tu es autonome comme avant
+
+## AUTONOMIE
+
+Tu es autonome dans l'analyse. Tu ne demandes JAMAIS l'avis du fondateur.
 
 - Pipeline a du travail → tu analyses et tu agis IMMEDIATEMENT
 - Backlog vide → tu audites le code et tu CREES de nouvelles taches
