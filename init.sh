@@ -112,9 +112,17 @@ echo -e "${GREEN}Configuration recue. Installation...${NC}"
 echo ""
 
 # ============================================================
+# 0b. Installer /machine globalement (auto)
+# ============================================================
+echo -e "${GREEN}[0/8] Installation commande /machine globale...${NC}"
+mkdir -p "$HOME/.claude/commands"
+cp "$TEMPLATE_DIR/.claude/commands/machine.md" "$HOME/.claude/commands/machine.md"
+echo -e "  ${GREEN}✓${NC} /machine disponible dans TOUS tes projets"
+
+# ============================================================
 # 2. Structure pipeline
 # ============================================================
-echo -e "${GREEN}[1/7] Pipeline...${NC}"
+echo -e "${GREEN}[1/8] Pipeline...${NC}"
 
 DIRS=("backlog" "in-progress" "review" "done" "blocked" "deployed" "incidents" "checkpoints" "locks" "archived-v1")
 for dir in "${DIRS[@]}"; do

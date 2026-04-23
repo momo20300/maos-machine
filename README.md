@@ -19,23 +19,20 @@ Aucun code n'est partagé. Seuls les agents et la config sont dans ce repo. Ton 
 - Compte GitHub
 - Windows 10/11
 
-## Utilisation rapide
-
-### Méthode 1 — `/machine` (recommandé)
-
-1. Copie `template/.claude/commands/machine.md` dans `~/.claude/commands/machine.md`
-2. Ouvre Claude Code dans n'importe quel dossier
-3. Tape : `/machine`
-4. Réponds aux questions (agents, APIs, vision)
-5. La machine s'installe et démarre toute seule
-
-### Méthode 2 — init.sh
+## Installation (une seule fois)
 
 ```bash
-git clone https://github.com/momo20300/maos-machine.git
-bash maos-machine/init.sh /chemin/vers/ton/projet
-# Puis double-clic sur start-machine.bat
+git clone https://github.com/momo20300/maos-machine.git && bash maos-machine/install.sh
 ```
+
+C'est tout. `/machine` est maintenant disponible dans tous tes projets.
+
+## Utilisation
+
+1. Ouvre Claude Code dans n'importe quel dossier
+2. Tape : `/machine`
+3. Réponds aux questions (agents, APIs, vision)
+4. La machine s'installe et démarre toute seule
 
 ## Les 8 agents
 
