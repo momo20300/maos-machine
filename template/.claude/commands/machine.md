@@ -241,8 +241,8 @@ sleep 2
 start "DESIGNER" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 600 /designer\""
 sleep 2
 
-# Veilleur-tech (x1)
-start "VEILLEUR-TECH" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/loop 600 /veilleur-tech\""
+# Veilleur-tech (x1 — premier scan puis hebdomadaire)
+start "VEILLEUR-TECH" cmd /k "cd /d \"$PROJECT_PATH_WIN\" && claude -p \"/veilleur-tech\""
 ```
 
 ### Etape 6 — Confirmer
