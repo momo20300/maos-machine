@@ -85,6 +85,28 @@ echo -e "${YELLOW}Combien de code-dev en parallele ?${NC} (defaut: 2) :"
 read -p "> " NUM_CODEDEV
 NUM_CODEDEV="${NUM_CODEDEV:-2}"
 
+# Stack technique
+echo -e "${YELLOW}Stack technique${NC} (ex: Next.js + NestJS + Prisma + PostgreSQL, ou Entree pour auto-detect) :"
+read -p "> " STACK_INFO
+STACK_INFO="${STACK_INFO:-Auto-detecte par les agents au premier scan}"
+
+# VISION DU PROJET — le plus important
+echo ""
+echo -e "${CYAN}━━━ VISION DU PROJET (le plus important) ━━━${NC}"
+echo -e "${YELLOW}Decris ton projet en quelques lignes.${NC}"
+echo -e "${YELLOW}C'est ce que le Stratege lira pour creer les taches.${NC}"
+echo -e "${YELLOW}(Tape ta vision, puis une ligne vide pour terminer)${NC}"
+echo ""
+VISION=""
+while IFS= read -r line; do
+  [ -z "$line" ] && break
+  VISION="${VISION}${line}\n"
+done
+
+if [ -z "$VISION" ]; then
+  VISION="Projet a definir. Le stratege doit auditer le code existant et proposer un plan."
+fi
+
 echo ""
 echo -e "${GREEN}Configuration recue. Installation...${NC}"
 echo ""
@@ -227,16 +249,90 @@ else
   sed -e "s/___DATE___/$DATE/g" \
       -e "s/___PROJECT_NAME___/$PROJECT_NAME/g" \
       -e "s/___AUTHOR___/mOOn/g" \
-      -e "s/___PROJECT_DESCRIPTION___/Projet configure par MAOS Machine/g" \
-      -e "s/___STACK___/Auto-detecte par les agents/g" \
+      -e "s|___PROJECT_DESCRIPTION___|$(echo -e "$VISION" | head -1)|g" \
+      -e "s|___STACK___|$STACK_INFO|g" \
       "$TEMPLATE_DIR/CLAUDE.md.template" > "$TARGET/CLAUDE.md"
-  echo -e "  ${GREEN}✓${NC} CLAUDE.md genere"
+
+  # Ajouter la vision complete dans CLAUDE.md
+  cat >> "$TARGET/CLAUDE.md" << VISIONEOF
+
+---
+
+## VISION DU FONDATEUR
+
+$(echo -e "$VISION")
+
+**C'est la directive principale. Le stratege doit creer des taches a partir de cette vision.
+Le designer doit specifier l'UI/UX selon cette vision.
+Le code-dev doit implementer selon cette vision.**
+
+VISIONEOF
+
+  echo -e "  ${GREEN}✓${NC} CLAUDE.md genere avec la vision du projet"
 fi
 
 # ============================================================
-# 7. .gitignore
+# 7. Premiere tache — le stratege sait quoi faire
 # ============================================================
-echo -e "${GREEN}[6/7] .gitignore...${NC}"
+echo -e "${GREEN}[6/8] Premiere tache backlog...${NC}"
+
+cat > "$TARGET/.maos-pipeline/backlog/001_initialisation-projet.md" << TASKEOF
+# 001 — Initialisation du projet $PROJECT_NAME
+
+**Priorite** : CRITIQUE
+**Creee par** : init.sh (automatique)
+**Assignee a** : stratege
+
+## Contexte
+
+Ce projet vient d'etre initialise par MAOS Machine.
+Le fondateur a decrit sa vision dans CLAUDE.md (section "VISION DU FONDATEUR").
+
+## Instructions pour le Stratege
+
+1. **Lire CLAUDE.md** en entier — comprendre la vision du fondateur
+2. **Auditer le code existant** (s'il y en a) :
+   - Structure des dossiers
+   - Stack detectee
+   - Fichiers existants
+   - package.json si present
+3. **Creer le PLAN.md** avec la direction du sprint
+4. **Creer les ZONES.md** avec la carte des territoires
+5. **Decomposer la vision** en taches concretes dans backlog/ :
+   - Architecture (P0)
+   - Design system (P0)
+   - Backend structure (P0)
+   - Frontend structure (P0)
+   - Puis features par ordre de priorite
+6. **Creer les taches DESIGN** pour le designer
+7. **Specifier chaque tache** avec fichiers concernes exacts
+
+## Vision du fondateur
+
+$(echo -e "$VISION")
+
+## Criteres de validation
+
+- PLAN.md cree
+- ZONES.md cree
+- Au moins 5 taches dans backlog/
+- Chaque tache a des fichiers concernes specifiques
+- Les taches sont dans l'ordre de priorite correct
+
+---
+## Rapport code-dev
+(non applicable — tache stratege)
+
+## Audit testeur
+(non applicable — tache stratege)
+TASKEOF
+
+echo -e "  ${GREEN}✓${NC} Tache 001 creee dans backlog/ (le stratege demarre immediatement)"
+
+# ============================================================
+# 8. .gitignore
+# ============================================================
+echo -e "${GREEN}[7/8] .gitignore...${NC}"
 
 GITIGNORE_LINES=("# MAOS Machine" ".maos-pipeline/locks/*" "!.maos-pipeline/locks/.gitkeep")
 if [ -f "$TARGET/.gitignore" ]; then
@@ -251,7 +347,7 @@ echo -e "  ${GREEN}✓${NC} .gitignore"
 # ============================================================
 # 8. Script de demarrage automatique
 # ============================================================
-echo -e "${GREEN}[7/7] Script de demarrage...${NC}"
+echo -e "${GREEN}[8/8] Script de demarrage...${NC}"
 
 # Convertir le path pour Windows batch
 TARGET_BAT=$(echo "$TARGET" | sed 's|/|\\|g' | sed 's|^\\c\\|C:\\|')
