@@ -409,7 +409,7 @@ start "DESIGNER" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /designer) | claud
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+3))] Lancement du Veilleur Tech...
-start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && (echo /veilleur-tech) | claude --dangerously-skip-permissions"
+start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && (echo /loop 604800 /veilleur-tech) | claude --dangerously-skip-permissions"
 
 echo.
 echo  ══════════════════════════════════════════════
