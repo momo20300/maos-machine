@@ -11,14 +11,14 @@ set -e
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
+BLUE='\033[0;34m'h
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
 echo ""
 echo -e "${PURPLE}╔══════════════════════════════════════════════════╗${NC}"
-echo -e "${PURPLE}║   MAOS Machine — Pipeline Autonome Multi-Agents ║${NC}"
+echo -e "${PURPLE}║   MAOS Machine — Pipeline Autonome Multi-Agents ║${NC}"h
 echo -e "${PURPLE}║   Installation 100% automatique                 ║${NC}"
 echo -e "${PURPLE}╚══════════════════════════════════════════════════╝${NC}"
 echo ""
@@ -374,11 +374,11 @@ echo.
 cd /d "$TARGET_BAT"
 
 echo  [1] Lancement du Chef d'Orchestre...
-start "CHEF" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 450 /chef\""
+start "CHEF" cmd /k "cd /d $TARGET_BAT && (echo /loop 450 /chef) | claude --dangerously-skip-permissions"
 timeout /t 3 /nobreak >nul
 
 echo  [2] Lancement du Stratege...
-start "STRATEGE" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /stratege\""
+start "STRATEGE" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /stratege) | claude --dangerously-skip-permissions"
 timeout /t 2 /nobreak >nul
 
 BATEOF
@@ -388,7 +388,7 @@ for i in $(seq 1 $NUM_CODEDEV); do
   NUM=$((i + 2))
 cat >> "$TARGET/start-machine.bat" << BATEOF
 echo  [$NUM] Lancement Code-Dev $i...
-start "CODE-DEV-$i" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 600 /code-dev\""
+start "CODE-DEV-$i" cmd /k "cd /d $TARGET_BAT && (echo /loop 600 /code-dev) | claude --dangerously-skip-permissions"
 timeout /t 2 /nobreak >nul
 
 BATEOF
@@ -397,19 +397,19 @@ done
 NEXT=$((NUM_CODEDEV + 3))
 cat >> "$TARGET/start-machine.bat" << BATEOF
 echo  [$NEXT] Lancement du Testeur...
-start "TESTEUR" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /testeur\""
+start "TESTEUR" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /testeur) | claude --dangerously-skip-permissions"
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+1))] Lancement du DevOps...
-start "DEVOPS" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /devops\""
+start "DEVOPS" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /devops) | claude --dangerously-skip-permissions"
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+2))] Lancement du Designer...
-start "DESIGNER" cmd /k "cd /d $TARGET_BAT && claude -p \"/loop 900 /designer\""
+start "DESIGNER" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /designer) | claude --dangerously-skip-permissions"
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+3))] Lancement du Veilleur Tech...
-start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && claude -p \"/veilleur-tech\""
+start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && (echo /veilleur-tech) | claude --dangerously-skip-permissions"
 
 echo.
 echo  ══════════════════════════════════════════════
