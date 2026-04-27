@@ -374,11 +374,11 @@ echo.
 cd /d "$TARGET_BAT"
 
 echo  [1] Lancement du Chef d'Orchestre...
-start "CHEF" cmd /k "cd /d $TARGET_BAT && (echo /loop 450 /chef) | claude --dangerously-skip-permissions"
+start "CHEF" cmd /k "cd /d $TARGET_BAT && (echo /loop 450s /chef) | claude --dangerously-skip-permissions --model claude-opus-4-7"
 timeout /t 3 /nobreak >nul
 
 echo  [2] Lancement du Stratege...
-start "STRATEGE" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /stratege) | claude --dangerously-skip-permissions"
+start "STRATEGE" cmd /k "cd /d $TARGET_BAT && (echo /loop 900s /stratege) | claude --dangerously-skip-permissions --model claude-opus-4-7"
 timeout /t 2 /nobreak >nul
 
 BATEOF
@@ -388,7 +388,7 @@ for i in $(seq 1 $NUM_CODEDEV); do
   NUM=$((i + 2))
 cat >> "$TARGET/start-machine.bat" << BATEOF
 echo  [$NUM] Lancement Code-Dev $i...
-start "CODE-DEV-$i" cmd /k "cd /d $TARGET_BAT && (echo /loop 600 /code-dev) | claude --dangerously-skip-permissions"
+start "CODE-DEV-$i" cmd /k "cd /d $TARGET_BAT && (echo /loop 600s /code-dev) | claude --dangerously-skip-permissions --model claude-opus-4-7"
 timeout /t 2 /nobreak >nul
 
 BATEOF
@@ -397,19 +397,19 @@ done
 NEXT=$((NUM_CODEDEV + 3))
 cat >> "$TARGET/start-machine.bat" << BATEOF
 echo  [$NEXT] Lancement du Testeur...
-start "TESTEUR" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /testeur) | claude --dangerously-skip-permissions"
+start "TESTEUR" cmd /k "cd /d $TARGET_BAT && (echo /loop 900s /testeur) | claude --dangerously-skip-permissions --model claude-sonnet-4-5"
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+1))] Lancement du DevOps...
-start "DEVOPS" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /devops) | claude --dangerously-skip-permissions"
+start "DEVOPS" cmd /k "cd /d $TARGET_BAT && (echo /loop 900s /devops) | claude --dangerously-skip-permissions --model claude-sonnet-4-5"
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+2))] Lancement du Designer...
-start "DESIGNER" cmd /k "cd /d $TARGET_BAT && (echo /loop 900 /designer) | claude --dangerously-skip-permissions"
+start "DESIGNER" cmd /k "cd /d $TARGET_BAT && (echo /loop 900s /designer) | claude --dangerously-skip-permissions --model claude-opus-4-7"
 timeout /t 2 /nobreak >nul
 
 echo  [$((NEXT+3))] Lancement du Veilleur Tech...
-start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && (echo /loop 604800 /veilleur-tech) | claude --dangerously-skip-permissions"
+start "VEILLEUR-TECH" cmd /k "cd /d $TARGET_BAT && (echo /loop 604800s /veilleur-tech) | claude --dangerously-skip-permissions --model claude-sonnet-4-5"
 
 echo.
 echo  ══════════════════════════════════════════════
